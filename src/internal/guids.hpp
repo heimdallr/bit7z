@@ -27,6 +27,7 @@ extern const GUID IID_IOutStream;
 extern const GUID IID_IStreamGetSize;
 extern const GUID IID_IStreamGetProps;
 extern const GUID IID_IStreamGetProps2;
+extern const GUID IID_IStreamSetRestriction;
 
 // ICoder.h
 extern const GUID IID_ICompressProgressInfo;
@@ -37,9 +38,11 @@ extern const GUID IID_ICryptoGetTextPassword2;
 
 // IArchive.h
 extern const GUID IID_ISetProperties;
+extern const GUID IID_IArchiveOpenCallback;
 extern const GUID IID_IInArchive;
 extern const GUID IID_IOutArchive;
 extern const GUID IID_IArchiveExtractCallback;
+extern const GUID IID_IArchiveExtractCallbackMessage2;
 extern const GUID IID_IArchiveOpenVolumeCallback;
 extern const GUID IID_IArchiveOpenSetSubArchiveName;
 extern const GUID IID_IArchiveUpdateCallback;
