@@ -10,7 +10,6 @@
 #ifndef CBUFFERINSTREAM_HPP
 #define CBUFFERINSTREAM_HPP
 
-#include "bittypes.hpp"
 #include "internal/com.hpp"
 #include "internal/guids.hpp"
 #include "internal/macros.hpp"
