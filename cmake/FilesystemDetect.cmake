@@ -9,7 +9,7 @@ if( MINGW OR BIT7Z_DISABLE_USE_STD_FILESYSTEM )
     # so we are always using the ghc::filesystem library.
     set( USE_STANDARD_FILESYSTEM OFF )
 else()
-    set( CMAKE_CXX_STANDARD 17 )
+    set( CMAKE_CXX_STANDARD 23 )
     include( CheckIncludeFileCXX )
     check_include_file_cxx( "filesystem" USE_STANDARD_FILESYSTEM )
 endif()

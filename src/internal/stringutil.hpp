@@ -59,7 +59,7 @@ inline auto path_to_tstring( const fs::path& path ) -> tstring {
     const auto& native_path = path.native();
     return narrow( native_path.c_str(), native_path.size() );
 #else
-    return path.u8string();
+    return path.string();
 #endif
 }
 
