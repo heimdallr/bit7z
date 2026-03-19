@@ -177,6 +177,12 @@ class BIT7Z_MAYBE_UNUSED BitArchiveEditor final : public BitArchiveWriter {
          */
         void applyChanges();
 
+		BitArchiveEditor* toEditor() noexcept override
+		{
+			return this;
+		}
+
+
     private:
         EditedItems mEditedItems;
 
