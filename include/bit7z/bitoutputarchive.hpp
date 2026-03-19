@@ -140,7 +140,7 @@ class BitOutputArchive {
          * @param inFile the path to the filesystem file to be added to the output archive.
          * @param name    (optional) user-defined path to be used inside the output archive.
          */
-        void addFile( const tstring& inFile, const tstring& name = {} );
+		BitGenericItem& addFile(const tstring& inFile, const tstring& name = {});
 
         /**
          * @brief Adds the given buffer file, using the given name as a path when compressed in the output archive.
@@ -148,7 +148,7 @@ class BitOutputArchive {
          * @param inBuffer  the buffer containing the file to be added to the output archive.
          * @param name      user-defined path to be used inside the output archive.
          */
-        void addFile( const std::vector< byte_t >& inBuffer, const tstring& name );
+		BitGenericItem& addFile(const std::vector<byte_t>& inBuffer, const tstring& name);
 
         /**
          * @brief Adds the given standard input stream, using the given name as a path when compressed
@@ -157,7 +157,7 @@ class BitOutputArchive {
          * @param inStream  the input stream to be added.
          * @param name      the name of the file inside the output archive.
          */
-        void addFile( std::istream& inStream, const tstring& name );
+		BitGenericItem& addFile(std::istream& inStream, const tstring& name);
 
         /**
          * @brief Adds all the files in the given vector of filesystem paths.
@@ -269,6 +269,8 @@ class BitOutputArchive {
          *         settings for writing the output archive.
          */
         auto creator() const noexcept -> const BitAbstractArchiveCreator&;
+
+		auto toInputArchive() const noexcept -> BitInputArchive*;
 
         /**
          * @brief Default destructor.

@@ -40,9 +40,14 @@ class StdInputItem final : public GenericInputItem {
 
         BIT7Z_NODISCARD auto getStream( ISequentialInStream** inStream ) const -> HRESULT override;
 
+		void setCreationTime(const FILETIME& fileTime) override;
+		void setLastAccessTime(const FILETIME& fileTime) override;
+		void setLastWriteTime(const FILETIME& fileTime) override;
+
     private:
         istream& mStream;
         fs::path mStreamPath;
+		FILETIME mCreationTime, mLastAccessTime, mLastWriteTime;
 };
 
 }  // namespace bit7z

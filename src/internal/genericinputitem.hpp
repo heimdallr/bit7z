@@ -36,7 +36,13 @@ struct GenericInputItem : public BitGenericItem {
 
     BIT7Z_NODISCARD auto itemProperty( BitProperty property ) const -> BitPropVariant override;
 
-    ~GenericInputItem() override = default;
+    virtual void setCreationTime(const FILETIME&) {}
+	virtual void setLastAccessTime(const FILETIME&) {}
+	virtual void setLastWriteTime(const FILETIME&) {}
+
+	void setItemProperty(BitProperty property, const BitPropVariant& value) override;
+
+	~GenericInputItem() override = default;
 };
 
 }  // namespace bit7z

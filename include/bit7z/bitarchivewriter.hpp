@@ -13,6 +13,7 @@
 #include "bitoutputarchive.hpp"
 
 namespace bit7z {
+class BitArchiveEditor;
 
 /**
  * @brief The BitArchiveWriter class allows creating new archives or updating old ones with new items.
@@ -113,6 +114,11 @@ class BitArchiveWriter : public BitAbstractArchiveCreator, public BitOutputArchi
                           std::istream& inArchive,
                           const BitInOutFormat& format,
                           const tstring& password = {} );
+
+		virtual BitArchiveEditor* toEditor() noexcept
+		{
+			return nullptr;
+		}
 };
 
 }  // namespace bit7z

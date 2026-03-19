@@ -11,6 +11,9 @@
  */
 
 #include "internal/genericinputitem.hpp"
+
+#include <cassert>
+
 #include "internal/stringutil.hpp"
 
 namespace bit7z {
@@ -47,6 +50,25 @@ auto GenericInputItem::itemProperty( BitProperty property ) const -> BitPropVari
             break;
     }
     return prop;
+}
+
+
+void GenericInputItem::setItemProperty(const BitProperty property, const BitPropVariant& value)
+{
+	switch (property)
+	{
+		case BitProperty::CTime:
+			return setCreationTime(value.getFileTime());
+
+		case BitProperty::ATime:
+			return setLastAccessTime(value.getFileTime());
+
+		case BitProperty::MTime:
+			return setLastWriteTime(value.getFileTime());
+
+		default:
+			assert(false && "unsupported key");
+	}
 }
 
 auto GenericInputItem::isSymLink() const -> bool {

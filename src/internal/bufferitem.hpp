@@ -42,9 +42,14 @@ class BufferItem final : public GenericInputItem {
 
         BIT7Z_NODISCARD auto attributes() const noexcept -> uint32_t override;
 
+        void setCreationTime(const FILETIME& fileTime) override;
+		void setLastAccessTime(const FILETIME& fileTime) override;
+		void setLastWriteTime(const FILETIME& fileTime) override;
+
     private:
         const vector< byte_t >& mBuffer;
         fs::path mBufferName;
+		FILETIME mCreationTime, mLastAccessTime, mLastWriteTime;
 };
 
 }  // namespace bit7z

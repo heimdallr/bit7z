@@ -70,22 +70,25 @@ void BitItemsVector::indexItem( const FilesystemItem& item, IndexingOptions opti
     }
 }
 
-void BitItemsVector::indexFile( const tstring& inFile, const tstring& name, bool followSymlinks ) {
+BitGenericItem& BitItemsVector::indexFile(const tstring& inFile, const tstring& name, bool followSymlinks)
+{
     const fs::path filePath = tstring_to_path( inFile );
     if ( fs::is_directory( filePath ) ) {
         throw BitException( "Input path points to a directory, not a file",
                             std::make_error_code( std::errc::invalid_argument ), inFile );
     }
     const auto symlinkPolicy = followSymlinks ? SymlinkPolicy::Follow : SymlinkPolicy::DoNotFollow;
-    mItems.emplace_back( std::make_unique< FilesystemItem >( filePath, tstring_to_path( name ), symlinkPolicy ) );
+    return *mItems.emplace_back( std::make_unique< FilesystemItem >( filePath, tstring_to_path( name ), symlinkPolicy ) );
 }
 
-void BitItemsVector::indexBuffer( const vector< byte_t >& inBuffer, const tstring& name ) {
-    mItems.emplace_back( std::make_unique< BufferItem >( inBuffer, tstring_to_path( name ) ) );
+BitGenericItem& BitItemsVector::indexBuffer(const vector<byte_t>& inBuffer, const tstring& name)
+{
+    return *mItems.emplace_back( std::make_unique< BufferItem >( inBuffer, tstring_to_path( name ) ) );
 }
 
-void BitItemsVector::indexStream( std::istream& inStream, const tstring& name ) {
-    mItems.emplace_back( std::make_unique< StdInputItem >( inStream, tstring_to_path( name ) ) );
+BitGenericItem& BitItemsVector::indexStream(std::istream& inStream, const tstring& name)
+{
+    return *mItems.emplace_back( std::make_unique< StdInputItem >( inStream, tstring_to_path( name ) ) );
 }
 
 auto BitItemsVector::size() const -> size_t {

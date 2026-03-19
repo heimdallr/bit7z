@@ -58,6 +58,8 @@ class BitGenericItem {
          */
         BIT7Z_NODISCARD virtual auto itemProperty( BitProperty property ) const -> BitPropVariant = 0;
 
+		virtual void setItemProperty(BitProperty /*property*/, const BitPropVariant& /*value*/) {};
+
         virtual ~BitGenericItem() = default;
 };
 
