@@ -18,6 +18,7 @@
 #include "bittypes.hpp"
 
 namespace bit7z {
+class BitGenericItem;
 
 using std::vector;
 using std::map;
@@ -106,7 +107,7 @@ class BitItemsVector final {
          * @param name            (optional) user-defined path to be used inside archives.
          * @param followSymlinks  (optional) whether to follow symbolic links or not.
          */
-        void indexFile( const tstring& inFile, const tstring& name = {}, bool followSymlinks = true );
+		BitGenericItem& indexFile(const tstring& inFile, const tstring& name = {}, bool followSymlinks = true);
 
         /**
          * @brief Indexes the given buffer, using the given name as a path when compressed in archives.
@@ -114,7 +115,7 @@ class BitItemsVector final {
          * @param inBuffer  the buffer containing the file to be indexed in the vector.
          * @param name      user-defined path to be used inside archives.
          */
-        void indexBuffer( const std::vector< byte_t >& inBuffer, const tstring& name );
+		BitGenericItem& indexBuffer(const std::vector<byte_t>& inBuffer, const tstring& name);
 
         /**
          * @brief Indexes the given standard input stream, using the given name as a path when compressed in archives.
@@ -122,7 +123,7 @@ class BitItemsVector final {
          * @param inStream  the standard input stream of the file to be indexed in the vector.
          * @param name      user-defined path to be used inside archives.
          */
-        void indexStream( std::istream& inStream, const tstring& name );
+		BitGenericItem& indexStream(std::istream& inStream, const tstring& name);
 
         /**
          * @return the size of the items vector.

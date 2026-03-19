@@ -96,18 +96,21 @@ void BitOutputArchive::addItems( const std::map< tstring, tstring >& inPaths ) {
     mNewItemsVector.indexPathsMap( inPaths, options );
 }
 
-void BitOutputArchive::addFile( const tstring& inFile, const tstring& name ) {
-    mNewItemsVector.indexFile( inFile,
+BitGenericItem& BitOutputArchive::addFile(const tstring& inFile, const tstring& name)
+{
+    return mNewItemsVector.indexFile( inFile,
                                mArchiveCreator.retainDirectories() ? inFile : name,
                                !mArchiveCreator.storeSymbolicLinks() );
 }
 
-void BitOutputArchive::addFile( const std::vector< byte_t >& inBuffer, const tstring& name ) {
-    mNewItemsVector.indexBuffer( inBuffer, name );
+BitGenericItem& BitOutputArchive::addFile(const std::vector<byte_t>& inBuffer, const tstring& name)
+{
+    return mNewItemsVector.indexBuffer( inBuffer, name );
 }
 
-void BitOutputArchive::addFile( std::istream& inStream, const tstring& name ) {
-    mNewItemsVector.indexStream( inStream, name );
+BitGenericItem& BitOutputArchive::addFile(std::istream& inStream, const tstring& name)
+{
+    return mNewItemsVector.indexStream( inStream, name );
 }
 
 void BitOutputArchive::addFiles( const std::vector< tstring >& inFiles ) {
@@ -397,6 +400,11 @@ auto BitOutputArchive::handler() const noexcept -> const BitAbstractArchiveHandl
 
 auto BitOutputArchive::creator() const noexcept -> const BitAbstractArchiveCreator& {
     return mArchiveCreator;
+}
+
+auto BitOutputArchive::toInputArchive() const noexcept -> BitInputArchive*
+{
+	return mInputArchive.get();
 }
 
 } // namespace bit7z
