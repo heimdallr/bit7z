@@ -22,7 +22,14 @@ using std::istream;
 
 namespace bit7z {
 
-StdInputItem::StdInputItem( istream& stream, fs::path path ) : mStream{ stream }, mStreamPath{ std::move( path ) } {}
+StdInputItem::StdInputItem(istream& stream, fs::path path)
+	: mStream { stream }
+	, mStreamPath { std::move(path) }
+	, mCreationTime { current_file_time() }
+	, mLastAccessTime { current_file_time() }
+	, mLastWriteTime { current_file_time() }
+{
+}
 
 auto StdInputItem::name() const -> tstring {
     return path_to_tstring( mStreamPath.filename() );
@@ -55,19 +62,34 @@ auto StdInputItem::size() const -> uint64_t {
 }
 
 auto StdInputItem::creationTime() const noexcept -> FILETIME { //-V524
-    return current_file_time();
+	return mCreationTime;
 }
 
 auto StdInputItem::lastAccessTime() const noexcept -> FILETIME { //-V524
-    return current_file_time();
+	return mLastAccessTime;
 }
 
 auto StdInputItem::lastWriteTime() const noexcept -> FILETIME {
-    return current_file_time();
+	return mLastWriteTime;
 }
 
 auto StdInputItem::attributes() const noexcept -> uint32_t {
     return static_cast< uint32_t >( FILE_ATTRIBUTE_NORMAL );
+}
+
+void StdInputItem::setCreationTime(const FILETIME& fileTime)
+{
+	mCreationTime = fileTime;
+}
+
+void StdInputItem::setLastAccessTime(const FILETIME& fileTime)
+{
+	mLastAccessTime = fileTime;
+}
+
+void StdInputItem::setLastWriteTime(const FILETIME& fileTime)
+{
+	mLastWriteTime = fileTime;
 }
 
 } // namespace bit7z

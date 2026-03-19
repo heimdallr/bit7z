@@ -13,6 +13,7 @@
 #include <utility>
 
 #include "internal/bufferitem.hpp"
+
 #include "internal/cbufferinstream.hpp"
 #include "internal/dateutil.hpp"
 #include "internal/stringutil.hpp"
@@ -23,7 +24,13 @@ using std::vector;
 namespace bit7z {
 
 BufferItem::BufferItem( const vector< byte_t >& buffer, fs::path name )
-    : mBuffer{ buffer }, mBufferName{ std::move( name ) } {}
+	: mBuffer { buffer }
+	, mBufferName { std::move(name) }
+	, mCreationTime { current_file_time() }
+	, mLastAccessTime { current_file_time() }
+	, mLastWriteTime { current_file_time() }
+{
+}
 
 auto BufferItem::name() const -> tstring {
     return path_to_tstring( mBufferName.filename() );
@@ -52,19 +59,35 @@ auto BufferItem::size() const noexcept -> uint64_t {
 }
 
 auto BufferItem::creationTime() const noexcept -> FILETIME { //-V524
-    return current_file_time();
+	return mCreationTime;
 }
 
 auto BufferItem::lastAccessTime() const noexcept -> FILETIME { //-V524
-    return current_file_time();
+	return mLastAccessTime;
 }
 
 auto BufferItem::lastWriteTime() const noexcept -> FILETIME {
-    return current_file_time();
+	return mLastWriteTime;
 }
 
 auto BufferItem::attributes() const noexcept -> uint32_t {
     return static_cast< uint32_t >( FILE_ATTRIBUTE_NORMAL );
 }
+
+void BufferItem::setCreationTime(const FILETIME& fileTime)
+{
+	mCreationTime = fileTime;
+}
+
+void BufferItem::setLastAccessTime(const FILETIME& fileTime)
+{
+	mLastAccessTime = fileTime;
+}
+
+void BufferItem::setLastWriteTime(const FILETIME& fileTime)
+{
+	mLastWriteTime = fileTime;
+}
+
 
 } // namespace bit7z
