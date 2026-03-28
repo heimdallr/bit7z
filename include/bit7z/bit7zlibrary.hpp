@@ -45,7 +45,7 @@ constexpr auto kDefaultLibrary = "<platform-dependent value>";
 #elif defined( _WIN32 )
 constexpr auto kDefaultLibrary = BIT7Z_STRING( "7z.dll" );
 #elif defined( __linux__ )
-constexpr auto kDefaultLibrary = "/usr/lib/p7zip/7z.so"; // Default installation path of the p7zip shared library.
+constexpr auto kDefaultLibrary = "./7z.so"; // Default installation path of the p7zip shared library.
 #else
 constexpr auto kDefaultLibrary = "./7z.so";
 #endif
