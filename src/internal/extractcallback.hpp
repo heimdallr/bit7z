@@ -10,6 +10,7 @@
 #ifndef EXTRACTCALLBACK_HPP
 #define EXTRACTCALLBACK_HPP
 
+#include <exception>
 #include <system_error>
 
 #include "bitinputarchive.hpp"
