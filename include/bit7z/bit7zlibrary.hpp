@@ -38,12 +38,16 @@ namespace bit7z {
  *
  * @note On Linux, the default library is the absolute path to the "7z.so" installed by p7zip.
  *
+ * @note On macOS app bundles, the library is expected in Contents/Frameworks.
+ *
  * @note In all other cases, the value will be the relative path to a "7z.so" in the working directory of the program.
  */
 #ifdef __DOXYGEN__
 constexpr auto kDefaultLibrary = "<platform-dependent value>";
 #elif defined( _WIN32 )
 constexpr auto kDefaultLibrary = BIT7Z_STRING( "7z.dll" );
+#elif defined( __APPLE__ )
+constexpr auto kDefaultLibrary = "@executable_path/../Frameworks/7z.so";
 #elif defined( __linux__ )
 constexpr auto kDefaultLibrary = "7z.so"; // Default installation path of the p7zip shared library.
 #else
