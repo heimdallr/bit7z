@@ -194,7 +194,7 @@ include( cmake/BuildOptions.cmake )
 include( cmake/CompilerOptions.cmake )
 
 # dependencies
-include( cmake/Dependencies.cmake )
+#include( cmake/Dependencies.cmake )
 
 # 7-zip source code
 target_link_libraries( ${LIB_TARGET} PRIVATE 7-zip )
